@@ -24,7 +24,8 @@ body{
     gap: 30px;
     border-radius: 15px;
     border: 1px solid lightslategray;
-    box-shadow: -1px 0px 2px 1px;
+    box-shadow: inset -5px -5px 10px 1px,
+                inset 2px 2px 10px 1px
 }
 
 #screen{
@@ -37,7 +38,7 @@ body{
     color: rgb(22, 92, 22);
     text-align: right;
     font-family: 'screen', sans-serif;
-    font-size: 50px;
+    font-size: 60px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -56,6 +57,10 @@ body{
 .display p{
     margin: 0;
     padding: 0;
+}
+
+.display#display{
+    font-size: 30px;
 }
 
 #buttons{
