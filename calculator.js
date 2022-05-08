@@ -45,46 +45,28 @@ function input() {
                 show += 0
                 displayContent2.textContent = show
             } else if (button.id == '+'){
-                if (numbers.length == 2) {
-                    numbers.push(show)
-                    displayContent.textContent = numbers[0] + op + numbers[1]
-                    let result = operate(numbers, op)
-                    displayContent2.textContent = result
-                    show = ''
-                    numbers.length = 0
-                    numbers.push(result)
-                }
-                numbers.push(show)
+                show += '+'
                 op = '+'
-                show = ''
-                displayContent.textContent = numbers[0] + op
                 displayContent2.textContent = show
             } else if (button.id == '-'){
-                numbers.push(show)
+                show += '-'
                 op = '-'
-                show = ''
-                displayContent.textContent = numbers[0] + op
                 displayContent2.textContent = show
             } else if (button.id == '*'){
-                numbers.push(show)
+                show += '*'
                 op = '*'
-                show = ''
-                displayContent.textContent = numbers[0] + op
                 displayContent2.textContent = show
             } else if (button.id == '/'){
-                numbers.push(show)
+                show += '÷'
                 op = '÷'
-                show = ''
-                displayContent.textContent = numbers[0] + op
                 displayContent2.textContent = show
             } else if (button.id == '='){
-                numbers.push(show)
-                displayContent.textContent = numbers[0] + op + numbers[1]
-                let result = operate(numbers, op)
+                let splitted = show.split(`${op}`)
+                let result = operate(splitted, op)
+                displayContent.textContent = show
                 displayContent2.textContent = result
-                show = ''
-                numbers.length = 0
-                numbers.push(result)
+                show = result
+                op = ''
             } else if (button.id == 'c'){
                 window.location.reload()
             }
@@ -114,10 +96,7 @@ function add(numbers) {
 };
 
 function subtract(numbers) {
-    const total = numbers.reduce((total, part) => {
-        return +total - +part
-      }, 0);
-      return total
+    return numbers[0] - numbers[1]
 };
 
 function multiply(numbers) {
