@@ -157,17 +157,35 @@ function input() {
     })
 }
 
-input()
-
 function operate(n1, n2, operator) {
     if (operator == '+') {
-        return add(n1, n2);
+        const result = add(n1, n2);
+        if (isInt(result) === false) {
+            return result.toFixed(3)
+        } else {
+            return result
+        }
     } else if (operator == '-') {
-        return subtract(n1, n2);
+        const result = subtract(n1, n2);
+        if (isInt(result)  === false){
+            return result.toFixed(3)
+        } else {
+            return result
+        }
     } else if (operator == '*') {
-        return multiply(n1, n2);
+        const result = multiply(n1, n2);
+        if (isInt(result) === false) {
+            return result.toFixed(3)
+        } else {
+            return result
+        }
     } else {
-        return divide(n1, n2);
+        const result = divide(n1, n2);
+        if (isInt(result) === false) {
+            return result.toFixed(3)
+        } else {
+            return result
+        }
     }
 }
 
@@ -186,3 +204,10 @@ function multiply(x, y) {
 function divide(x, y) {
     return +x / +y
 };
+
+function isInt(n) {
+    return n % 1 === 0;
+}
+
+
+input()

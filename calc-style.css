@@ -28,6 +28,8 @@ h1{
     font-size: 110px;
     font-weight:100;
     color: rgb(255, 134, 255);
+    text-shadow: 2px 5px 21px magenta,
+                 2px 5px 5px magenta
 }
 
 #container{
@@ -45,6 +47,7 @@ h1{
     border: 1px solid lightslategray;
     box-shadow: inset -5px -5px 10px 1px,
                 inset 2px 2px 10px 1px
+                
 }
 
 #screen{
@@ -130,18 +133,22 @@ h1{
 }
 
 .op,
-.cl{
-    background-color: lightsalmon;
+.dot{
+    background-color: rgb(255, 130, 81);
 }
 
 .btn.op:hover,
-.btn.cl:hover{
+.btn.dot:hover{
     background-color: rgb(219, 124, 86);
 }
 
 .erase{
     width: 173px;
     background-color: rgb(255, 0, 128);
+}
+
+.btn.erase:hover{
+    background-color: rgb(206, 0, 103);
 }
 
 
