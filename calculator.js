@@ -8,65 +8,148 @@ display.append(displayContent)
 display2.append(displayContent2)
 
 function input() {
-    let show = ''
-    let numbers = []
-    let op = ''
+    let eq = {n1: '', n2: '', op:''}
+    let ac = ''
     const buttons = document.querySelectorAll('.btn');
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
             if (button.id == 1){
-                show += 1
-                displayContent2.textContent = show
+                ac += 1
+                displayContent2.textContent = ac
             } else if (button.id == 2){
-                show += 2
-                displayContent2.textContent = show
+                ac += 2
+                displayContent2.textContent = ac
             } else if (button.id == 3){
-                show += 3
-                displayContent2.textContent = show
+                ac += 3
+                displayContent2.textContent = ac
             } else if (button.id == 4){
-                show += 4
-                displayContent2.textContent = show
+                ac += 4
+                displayContent2.textContent = ac
             } else if (button.id == 5){
-                show += 5
-                displayContent2.textContent = show
+                ac += 5
+                displayContent2.textContent = ac
             } else if (button.id == 6){
-                show += 6
-                displayContent2.textContent = show
+                ac += 6
+                displayContent2.textContent = ac
             } else if (button.id == 7){
-                show += 7
-                displayContent2.textContent = show
+                ac += 7
+                displayContent2.textContent = ac
             } else if (button.id == 8){
-                show += 8
-                displayContent2.textContent = show
+                ac += 8
+                displayContent2.textContent = ac
             } else if (button.id == 9){
-                show += 9
-                displayContent2.textContent = show
+                ac += 9
+                displayContent2.textContent = ac
             } else if (button.id == 0){
-                show += 0
-                displayContent2.textContent = show
+                ac += 0
+                displayContent2.textContent = ac
             } else if (button.id == '+'){
-                show += '+'
-                op = '+'
-                displayContent2.textContent = show
+                if (eq.n1 == '') {
+                    eq.n1 = ac
+                    eq.op = '+'
+                    ac = ''
+                    displayContent.textContent = eq.n1 + eq.op + eq.n2
+                } else if (eq.n1 != '' && eq.op == '') {
+                    eq.op = '+'
+                    displayContent.textContent = eq.n1 + eq.op + eq.n2
+                } else if (eq.n1 != '' && eq.op != '') {
+                    if (eq.op == '÷' &&  eq.n2 != '') {
+                        eq.n2 == 0
+                    } else {
+                        eq.n2 = ac
+                    }
+                    let result = operate(eq.n1, eq.n2, eq.op)
+                    displayContent.textContent = result
+                    eq.op = '+'
+                    displayContent2.textContent = result + eq.op
+                    eq.n1 = result
+                    ac = ''
+                }
             } else if (button.id == '-'){
-                show += '-'
-                op = '-'
-                displayContent2.textContent = show
+                if (eq.n1 == '') {
+                    eq.n1 = ac
+                    eq.op = '-'
+                    ac = ''
+                    displayContent.textContent = eq.n1 + eq.op + eq.n2
+                } else if (eq.n1 != '' && eq.op == '') {
+                    eq.op = '-'
+                    displayContent.textContent = eq.n1 + eq.op + eq.n2
+                } else if (eq.n1 != '' && eq.op != '') {
+                    if (eq.op == '÷' &&  eq.n2 != '') {
+                        eq.n2 == 0
+                    } else {
+                        eq.n2 = ac
+                    }
+                    let result = operate(eq.n1, eq.n2, eq.op)
+                    displayContent.textContent = result
+                    eq.op = '-'
+                    displayContent2.textContent = result + eq.op
+                    eq.n1 = result
+                    ac = ''
+                }
             } else if (button.id == '*'){
-                show += '*'
-                op = '*'
-                displayContent2.textContent = show
+                if (eq.n1 == '') {
+                    eq.n1 = ac
+                    eq.op = '*'
+                    ac = ''
+                    displayContent.textContent = eq.n1 + eq.op + eq.n2
+                } else if (eq.n1 != '' && eq.op == '') {
+                    eq.op = '*'
+                    displayContent.textContent = eq.n1 + eq.op + eq.n2
+                } else if (eq.n1 != '' && eq.op != '') {
+                    if (eq.op == '÷' &&  eq.n2 != '') {
+                        eq.n2 == 0
+                    } else {
+                        eq.n2 = ac
+                    }
+                    let result = operate(eq.n1, eq.n2, eq.op)
+                    displayContent.textContent = result
+                    eq.op = '*'
+                    displayContent2.textContent = result + eq.op
+                    eq.n1 = result
+                    ac = ''
+                }
             } else if (button.id == '/'){
-                show += '÷'
-                op = '÷'
-                displayContent2.textContent = show
+                if (eq.n1 == '') {
+                    eq.n1 = ac
+                    eq.op = '÷'
+                    ac = ''
+                    displayContent.textContent = eq.n1 + eq.op + eq.n2
+                } else if (eq.n1 != '' && eq.op == '') {
+                    eq.op = '÷'
+                    displayContent.textContent = eq.n1 + eq.op + eq.n2
+                } else if (eq.n1 != '' && eq.op != '') {
+                    if (eq.op == '÷' &&  eq.n2 != '') {
+                        eq.n2 == 0
+                    } else {
+                        eq.n2 = ac
+                    }
+                    let result = operate(eq.n1, eq.n2, eq.op)
+                    displayContent.textContent = result
+                    eq.op = '÷'
+                    displayContent2.textContent = result + eq.op
+                    eq.n1 = result
+                    ac = ''
+                }
+            } else if (button.id == '.'){
+                if (!ac.includes('.')){
+                    ac += '.'
+                    displayContent2.textContent = ac
+                }
+            } else if (button.id == 'del'){
+                let del = ac.slice(0, -1)
+                ac = del
+                displayContent2.textContent = ac
             } else if (button.id == '='){
-                let splitted = show.split(`${op}`)
-                let result = operate(splitted, op)
-                displayContent.textContent = show
+                eq.n2 = ac
+                let result = operate(eq.n1, eq.n2, eq.op)
+                if (result === Infinity){alert('You cannot divide anything by zero. You\'re no hero.'); window.location.reload()}
+                displayContent.textContent = eq.n1 + eq.op + eq.n2
                 displayContent2.textContent = result
-                show = result
-                op = ''
+                eq.n1 = result
+                eq.n2 = ''
+                eq.op = ''
+                ac = ''
             } else if (button.id == 'c'){
                 window.location.reload()
             }
@@ -76,39 +159,30 @@ function input() {
 
 input()
 
-function operate(numbers, operator) {
+function operate(n1, n2, operator) {
     if (operator == '+') {
-        return add(numbers);
+        return add(n1, n2);
     } else if (operator == '-') {
-        return subtract(numbers);
+        return subtract(n1, n2);
     } else if (operator == '*') {
-        return multiply(numbers);
+        return multiply(n1, n2);
     } else {
-        return divide(numbers);
+        return divide(n1, n2);
     }
 }
 
-function add(numbers) {
-    const total = numbers.reduce((total, part) => {
-        return +total + +part
-      }, 0);
-      return total
+function add(x, y) {
+    return +x + +y
 };
 
-function subtract(numbers) {
-    return numbers[0] - numbers[1]
+function subtract(x, y) {
+    return +x - +y
 };
 
-function multiply(numbers) {
-    const total = numbers.reduce((total, part) => {
-        return +total * +part
-      }, );
-      return total
+function multiply(x, y) {
+    return +x * +y
 };
 
-function divide(numbers) {
-    const total = numbers.reduce((total, part) => {
-        return +total / +part
-      }, );
-      return total
+function divide(x, y) {
+    return +x / +y
 };
