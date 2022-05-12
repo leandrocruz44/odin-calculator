@@ -161,28 +161,28 @@ function operate(n1, n2, operator) {
     if (operator == '+') {
         const result = add(n1, n2);
         if (isInt(result) === false) {
-            return result.toFixed(3)
+            return result.toFixed(2)
         } else {
             return result
         }
     } else if (operator == '-') {
         const result = subtract(n1, n2);
         if (isInt(result)  === false){
-            return result.toFixed(3)
+            return result.toFixed(2)
         } else {
             return result
         }
     } else if (operator == '*') {
         const result = multiply(n1, n2);
         if (isInt(result) === false) {
-            return result.toFixed(3)
+            return result.toFixed(2)
         } else {
             return result
         }
     } else {
         const result = divide(n1, n2);
         if (isInt(result) === false) {
-            return result.toFixed(3)
+            return result.toFixed(2)
         } else {
             return result
         }
