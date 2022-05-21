@@ -141,15 +141,20 @@ function input() {
                 ac = del
                 displayContent2.textContent = ac
             } else if (button.id == '='){
-                eq.n2 = ac
-                let result = operate(eq.n1, eq.n2, eq.op)
-                if (result === Infinity){alert('You cannot divide anything by zero. You\'re no hero.'); window.location.reload()}
-                displayContent.textContent = eq.n1 + eq.op + eq.n2
-                displayContent2.textContent = result
-                eq.n1 = result
-                eq.n2 = ''
-                eq.op = ''
-                ac = ''
+                if (ac == '') {
+                    return ''
+                } else {
+                    eq.n2 = ac
+                    let result = operate(eq.n1, eq.n2, eq.op)
+                    if (result === Infinity){alert('You cannot divide anything by zero. You\'re no hero.'); window.location.reload()}
+                    displayContent.textContent = eq.n1 + eq.op + eq.n2
+                    displayContent2.textContent = result
+                    eq.n1 = result
+                    eq.n2 = ''
+                    eq.op = ''
+                    ac = ''
+                }
+                
             } else if (button.id == 'c'){
                 window.location.reload()
             }
