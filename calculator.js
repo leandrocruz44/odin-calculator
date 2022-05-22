@@ -8,151 +8,61 @@ display.append(displayContent)
 display2.append(displayContent2)
 
 function input() {
-    let eq = {n1: '', n2: '', op:''}
-    let ac = ''
+    let equation = {n1: '', n2: '', op:''}
+    let accumulator = ''
+    let fourOperators = (s) => {
+        if (equation.n1 == '') {
+            equation.n1 = accumulator
+            equation.op = s
+            accumulator = ''
+            displayContent.textContent = equation.n1 + equation.op + equation.n2
+        } else if (equation.n1 != '' && equation.op == '') {
+            equation.op = s
+            displayContent.textContent = equation.n1 + equation.op + equation.n2
+        } else if (equation.n1 != '' && equation.op != '') {
+            if (equation.op == '÷' &&  equation.n2 != '') {
+                equation.n2 == 0
+            } else {
+                equation.n2 = accumulator
+            }
+            let result = operate(equation.n1, equation.n2, equation.op)
+            displayContent.textContent = result
+            equation.op = s
+            displayContent2.textContent = result + equation.op
+            equation.n1 = result
+            accumulator = ''
+        }
+    }
     const buttons = document.querySelectorAll('.btn');
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
-            if (button.id == 1){
-                ac += 1
-                displayContent2.textContent = ac
-            } else if (button.id == 2){
-                ac += 2
-                displayContent2.textContent = ac
-            } else if (button.id == 3){
-                ac += 3
-                displayContent2.textContent = ac
-            } else if (button.id == 4){
-                ac += 4
-                displayContent2.textContent = ac
-            } else if (button.id == 5){
-                ac += 5
-                displayContent2.textContent = ac
-            } else if (button.id == 6){
-                ac += 6
-                displayContent2.textContent = ac
-            } else if (button.id == 7){
-                ac += 7
-                displayContent2.textContent = ac
-            } else if (button.id == 8){
-                ac += 8
-                displayContent2.textContent = ac
-            } else if (button.id == 9){
-                ac += 9
-                displayContent2.textContent = ac
-            } else if (button.id == 0){
-                ac += 0
-                displayContent2.textContent = ac
-            } else if (button.id == '+'){
-                if (eq.n1 == '') {
-                    eq.n1 = ac
-                    eq.op = '+'
-                    ac = ''
-                    displayContent.textContent = eq.n1 + eq.op + eq.n2
-                } else if (eq.n1 != '' && eq.op == '') {
-                    eq.op = '+'
-                    displayContent.textContent = eq.n1 + eq.op + eq.n2
-                } else if (eq.n1 != '' && eq.op != '') {
-                    if (eq.op == '÷' &&  eq.n2 != '') {
-                        eq.n2 == 0
-                    } else {
-                        eq.n2 = ac
-                    }
-                    let result = operate(eq.n1, eq.n2, eq.op)
-                    displayContent.textContent = result
-                    eq.op = '+'
-                    displayContent2.textContent = result + eq.op
-                    eq.n1 = result
-                    ac = ''
-                }
-            } else if (button.id == '-'){
-                if (eq.n1 == '') {
-                    eq.n1 = ac
-                    eq.op = '-'
-                    ac = ''
-                    displayContent.textContent = eq.n1 + eq.op + eq.n2
-                } else if (eq.n1 != '' && eq.op == '') {
-                    eq.op = '-'
-                    displayContent.textContent = eq.n1 + eq.op + eq.n2
-                } else if (eq.n1 != '' && eq.op != '') {
-                    if (eq.op == '÷' &&  eq.n2 != '') {
-                        eq.n2 == 0
-                    } else {
-                        eq.n2 = ac
-                    }
-                    let result = operate(eq.n1, eq.n2, eq.op)
-                    displayContent.textContent = result
-                    eq.op = '-'
-                    displayContent2.textContent = result + eq.op
-                    eq.n1 = result
-                    ac = ''
-                }
-            } else if (button.id == '*'){
-                if (eq.n1 == '') {
-                    eq.n1 = ac
-                    eq.op = '*'
-                    ac = ''
-                    displayContent.textContent = eq.n1 + eq.op + eq.n2
-                } else if (eq.n1 != '' && eq.op == '') {
-                    eq.op = '*'
-                    displayContent.textContent = eq.n1 + eq.op + eq.n2
-                } else if (eq.n1 != '' && eq.op != '') {
-                    if (eq.op == '÷' &&  eq.n2 != '') {
-                        eq.n2 == 0
-                    } else {
-                        eq.n2 = ac
-                    }
-                    let result = operate(eq.n1, eq.n2, eq.op)
-                    displayContent.textContent = result
-                    eq.op = '*'
-                    displayContent2.textContent = result + eq.op
-                    eq.n1 = result
-                    ac = ''
-                }
-            } else if (button.id == '/'){
-                if (eq.n1 == '') {
-                    eq.n1 = ac
-                    eq.op = '÷'
-                    ac = ''
-                    displayContent.textContent = eq.n1 + eq.op + eq.n2
-                } else if (eq.n1 != '' && eq.op == '') {
-                    eq.op = '÷'
-                    displayContent.textContent = eq.n1 + eq.op + eq.n2
-                } else if (eq.n1 != '' && eq.op != '') {
-                    if (eq.op == '÷' &&  eq.n2 != '') {
-                        eq.n2 == 0
-                    } else {
-                        eq.n2 = ac
-                    }
-                    let result = operate(eq.n1, eq.n2, eq.op)
-                    displayContent.textContent = result
-                    eq.op = '÷'
-                    displayContent2.textContent = result + eq.op
-                    eq.n1 = result
-                    ac = ''
-                }
+            if (button.classList.contains('num')){
+                accumulator += +button.id
+                displayContent2.textContent = accumulator
+            } else if (button.classList.contains('op')){
+                return fourOperators(button.id) 
             } else if (button.id == '.'){
-                if (!ac.includes('.')){
-                    ac += '.'
-                    displayContent2.textContent = ac
+                if (!accumulator.includes('.')){
+                    accumulator += '.'
+                    displayContent2.textContent = accumulator
                 }
             } else if (button.id == 'del'){
-                let del = ac.slice(0, -1)
-                ac = del
-                displayContent2.textContent = ac
+                let del = accumulator.slice(0, -1)
+                accumulator = del
+                displayContent2.textContent = accumulator
             } else if (button.id == '='){
-                if (ac == '') {
+                if (accumulator == '') {
                     return ''
                 } else {
-                    eq.n2 = ac
-                    let result = operate(eq.n1, eq.n2, eq.op)
+                    equation.n2 = accumulator
+                    let result = operate(equation.n1, equation.n2, equation.op)
                     if (result === Infinity){alert('You cannot divide anything by zero. You\'re no hero.'); window.location.reload()}
-                    displayContent.textContent = eq.n1 + eq.op + eq.n2
+                    displayContent.textContent = equation.n1 + equation.op + equation.n2
                     displayContent2.textContent = result
-                    eq.n1 = result
-                    eq.n2 = ''
-                    eq.op = ''
-                    ac = ''
+                    equation.n1 = result
+                    equation.n2 = ''
+                    equation.op = ''
+                    accumulator = ''
                 }
                 
             } else if (button.id == 'c'){
